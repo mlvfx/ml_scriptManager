@@ -1,0 +1,51 @@
+ml_scriptManager by Matt Lumb
+http://mattlumbvfx.polytronik.co.nz, tkdmatt@gmail.com
+ 
+If you enjoy using my script let me know, or if you have feed back send that too.
+
+Purpose: Ever had so many scripts you couldn't manage them, or wanted an easy way to share scripts with workmates or across workstations,
+Script Manager can help. The idea is to have a window to show all your scripts neatly arranged for easy access. There is a description/instruction field
+so you can remind yourself what the requirements of a script may be, and you can add and delete your own categories and categorize all your scripts.
+It also allows you to assign scripts to multiple categories, and this is completely free of any kind of database.
+
+Usage: Put ml_scriptManager in your maya script folder (The one that gets autoloaded from the MAYA_SCRIPT_PATH, commonly set to documents/maya/maya version/scripts.
+type ml_scriptManager in the command line or script editor, or alternatively create a text file in your script folder called userSetup.mel, and put ml_scriptManager in it to have
+Script Manager load everytime you run Maya.
+
+IMPORTANT: scriptManager runs best with scripts that have their main proc the same name as the script itself, i.e global proc test(){} in test.mel, this way you can just click the run button,
+otherwise you can click the source button, (provided it has no procs required to run, or it calls its own proc itself). 
+
+Notes: In the locations tab you can automatically load scripts in your favorite script editor, it defaults to Notepad++ but you can change the application in the Settings menu in ScriptManager.
+You can also auto search Creative Crash for scripts from the Scripts tabs, it will launch your default browser with your search terms.
+A right click menu has been added to the main list, select a script, right click to perform functions or assign to a category.
+
+Feature List:
+
+- Add as many local/network locations as you would like to load scripts from, share with others/multiple workstations
+- Categorize your scripts within Script Manager. Right click menu for easier sorting. 
+- Run, edit, and sort python scripts.
+- Store custom run commands for python scripts.
+- Add descriptions/instructions to any/all of your scripts.
+- Add and remove your own categoies.
+- Quickly search creative crash from within the UI.
+- Quickly launch your favourite script editor and script from the UI.
+- Resource/reload your scripts automatically i.e. Work in an external editor such as notepad++, save, reload in script manager, run the script.
+
+Features still to add:
+
+- Windowmode optionVar
+- Add script icons/screenshots.
+- Shortcut to quickly copy .mel files from your download folder to a chosen script folder.
+- Package/Archive all files up to zip for quickly transferring to a new workstation. 
+
+Version Info: Tested in Maya 2013, should work fine in 2011/12, and have yet to thoroughly test in Maya 2010, only in windows. Most features should work in osx/linux.
+
+Version Update - 1.6.0 - Added python support. Python categorizing. Python custom run commands. Default tab optionVariable.
+Version Update - 1.5.5 - Added python UI elements.
+Version Update - 1.5.4 - Fix location adding in 2012, and the event of selecting nothing.
+Version Update - 1.5.3 - Additional control to delete the dock control, to match the maya ui button.
+Version Update - 1.5.2 - Added UI support for Maya 2010 and below.
+
+Bugs - 2010 version displays defaultMenuItem in the category selector.
+
+- Enjoy!
