@@ -52,20 +52,24 @@ class ml_scriptManager:
                        innerMarginHeight=5)
         self.create_mel_tab()
         self.create_py_tab()
+        self.create_folders_tab()
 
-        cmds.tabLayout('ml_tabs',
-            edit=True,
-            tabLabel=[('mel_form_layout', 'Mel'),('py_form_layout', 'Python')])
+        cmds.tabLayout('ml_tabs', edit=True,
+                       tabLabel=[('mel_form_layout', 'Mel'),
+                       ('py_form_layout', 'Python'), ('folders_layout',
+                       'Locations')])
 
         # SHOW THE WINDOW AND EDIT SIZE
+
         cmds.showWindow('ml_scriptManagerUI')
+
         # cmds.dockControl('ml_dockControl',
         #     w=self.width,
         #     allowedArea='all',
         #     area='right',
         #     l='Script Manager',
         #     content='ml_scriptManagerUI')
-        
+
         cmds.window('ml_scriptManagerUI', e=True, wh=(self.width, 500))
 
         if cmds.optionVar(exists='ml_defaultTab'):
@@ -275,8 +279,9 @@ class ml_scriptManager:
             ('edit_py_script', 'top', self.margin),
             ('edit_py_script', 'right', self.margin),
             ('edit_py_script', 'bottom', self.margin),
-            ], ac=[('edit_py_script', 'left',self.spacer, 'source_py_script')],
-                an=[('source_py_script', 'right')])
+            ], ac=[('edit_py_script', 'left', self.spacer,
+                   'source_py_script')], an=[('source_py_script',
+                    'right')])
 
         cmds.textScrollList('py_list', p='py_list_form', ams=False)
 
@@ -290,8 +295,8 @@ class ml_scriptManager:
             mh=self.spacer,
             )
 
-        cmds.columnLayout('py_description_cl',
-                          p='py_description_frame', adj=True)
+        cmds.columnLayout('py_description_cl', p='py_description_frame'
+                          , adj=True)
 
         cmds.scrollField(
             'mel_description_field',
@@ -319,12 +324,12 @@ class ml_scriptManager:
             ('py_description_frame', 'left', self.spacer),
             ('py_description_frame', 'right', self.spacer),
             ('py_description_frame', 'bottom', self.spacer),
-            ], an=[('py_category_switch', 'bottom'), ('py_button_form'
-                   , 'bottom'), ('py_description_frame', 'top')],
+            ], an=[('py_category_switch', 'bottom'), ('py_button_form',
+                   'bottom'), ('py_description_frame', 'top')],
                 ac=[('py_category_switch', 'top', self.spacer,
-                    'py_button_form'), ('py_list', 'top',
-                    self.spacer, 'py_category_switch'), ('py_list',
-                    'bottom', self.spacer, 'py_description_frame')])
+                    'py_button_form'), ('py_list', 'top', self.spacer,
+                    'py_category_switch'), ('py_list', 'bottom',
+                    self.spacer, 'py_description_frame')])
 
         cmds.formLayout('py_form_layout', edit=True,
                         af=[('py_list_frame', 'left', self.spacer),
@@ -332,13 +337,59 @@ class ml_scriptManager:
                         ('py_list_frame', 'bottom', self.spacer),
                         ('py_list_frame', 'top', self.spacer)])
 
+    def create_folders_tab(self):
+
+        # Creates tab for adding folders
+
+        cmds.formLayout('folders_layout', p='ml_tabs', nd=100)
+
+        cmds.frameLayout(
+            'commands_frame',
+            p='folders_layout',
+            label='Commands',
+            mw=self.spacer,
+            mh=self.spacer,
+            borderStyle='etchedIn',
+            )
+
+        cmds.rowLayout('commands_rowlayout', p='commands_frame', nc=3,
+                       ad3=3)  # cw3=(80,100,80),
+
+        cmds.button(p='commands_rowlayout', w=70, label='Add',
+                    ann='Add local/network location to find scripts')
+        cmds.button(p='commands_rowlayout', w=70, label='Remove',
+                    ann='Removes scripts locations')
+        cmds.button(p='commands_rowlayout', label='Re-source',
+                    ann='Resource all scripts')
+
+        cmds.frameLayout(
+            'locations_frame',
+            p='folders_layout',
+            label='Locations',
+            mw=self.spacer,
+            mh=self.spacer,
+            borderStyle='etchedIn',
+            )
+
+        cmds.treeLister('locations_treelister', p='locations_frame')
+
+        cmds.formLayout('folders_layout', edit=True, af=[
+            ('commands_frame', 'left', self.spacer),
+            ('commands_frame', 'right', self.spacer),
+            ('commands_frame', 'top', self.spacer),
+            ('locations_frame', 'left', self.spacer),
+            ('locations_frame', 'right', self.spacer),
+            ('locations_frame', 'bottom', self.spacer),
+            ], an=[('commands_frame', 'bottom')], ac=[('locations_frame'
+                    , 'top', self.spacer, 'commands_frame')])
+
     def set_default_tab(self, *args):
         if cmds.optionVar(exists='ml_defaultTab'):
             tab = cmds.tabLayout('ml_tabs', q=True, st=True)
-            cmds.optionVar(sv=('ml_defaultTab',tab))
+            cmds.optionVar(sv=('ml_defaultTab', tab))
         else:
             tab = cmds.tabLayout('ml_tabs', q=True, st=True)
-            cmds.optionVar(sv=('ml_defaultTab',tab))
+            cmds.optionVar(sv=('ml_defaultTab', tab))
 
 
 test = ml_scriptManager()
